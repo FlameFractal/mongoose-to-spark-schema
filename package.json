@@ -1,0 +1,27 @@
+{
+  "name": "mongoose-to-spark-schema",
+  "version": "1.0.3",
+  "description": " Generate Spark StructType schema JSON from Mongoose model",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vishal Gauba <vishal.gauba@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^6.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlameFractal/mongoose-to-spark-schema.git"
+  },
+  "keywords": [
+    "spark",
+    "mongooose",
+    "structtype"
+  ],
+  "bugs": {
+    "url": "https://github.com/FlameFractal/mongoose-to-spark-schema/issues"
+  },
+  "homepage": "https://github.com/FlameFractal/mongoose-to-spark-schema#readme"
+}
