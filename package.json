@@ -1,6 +1,6 @@
 {
   "name": "mongoose-to-spark-schema",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": " Generate Spark StructType schema JSON from Mongoose model",
   "main": "index.js",
   "scripts": {
