@@ -1,6 +1,6 @@
 /**
  * @author Vishal Gauba
- * @desc Generate Spark StructType schema JSON from Mongoose model 
+ * @desc Generate Spark StructType schema JSON from Mongoose model
  * @example node index.js --model=./path-to-mongoose-model.js
  * @example node index.js --model=./path-to-mongoose-model.js --output=./path-to-output-schema.json
  */
@@ -89,6 +89,7 @@ class Main {
 		}
 
 		// mongoose subdocuments
+		// users: mongoose.Schema()
 		if (value.constructor.name === 'Schema') {
 			value = value.tree
 		}
@@ -114,7 +115,10 @@ class Main {
 		if (value.constructor.name === 'Object') {
 			// age: {type: Number, default: 0, enum: []}
 			// _id: { auto: true, type: 'ObjectId' }
-			if (value.type && !value.type.type) {
+			if (value.type
+				// handle fields with key name 'type'
+				&& (value.type.constructor.name === 'Function' || value.type.constructor.name === 'String')
+			) {
 				return {
 					...Main.BaseBlock,
 					...this._parseObject({key, value: value.type}),
@@ -134,8 +138,18 @@ class Main {
 		}
 
 		if (value.constructor.name === 'Array') {
+
+			// mongoose subdocuments
+			// users: [mongoose.Schema()]
+			if (value[0].constructor.name === 'Schema') {
+				value[0] = value[0].tree
+			}
+
 			// users: [{name: String, age: Number}]
-			if (value[0].constructor.name === 'Object' && !value[0].type) {
+			if (value[0].constructor.name === 'Object'
+				// handle fields with key name 'type'
+				&& !(value[0].type && (value[0].type.constructor.name === 'Function' || value[0].type.constructor.name === 'String'))
+			) {
 				return {
 					...Main.BaseBlock,
 					name: key,
